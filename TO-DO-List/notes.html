@@ -7,7 +7,24 @@
         text-decoration: line-through;
         text-decoration-color: brown;
     }
-   
+   .close{
+       position: absolute;
+       margin-left: 30px;
+   }
+   input{
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    width: 75%;
+    padding: 10px;
+    float: left;
+    font-size: 16px;
+}
+li {
+    text-align: center;
+    margin-left: 5px;
+    font-size: larger;
+}
 </style>
 <body>
 <div id="Title" class="header">
@@ -17,6 +34,7 @@
         <input id="submit" type="submit">
         <p id=" blank"></p>
     </form>
+    <br><br>
     <ul id="tasks">
         
 
@@ -38,6 +56,7 @@
                 document.querySelector('#submit').disabled = false;
             }
         };
+    });
         document.querySelector('#new-task').onsubmit = () => {
             var todo = document.createElement('li');
             todo.innerHTML = document.querySelector('#TASK').value;
@@ -48,6 +67,8 @@
             ele.appendChild(node);
             todo.append(ele)
             document.querySelector('#tasks').append(todo);
+            ele.onclick = deleteitem;
+
             document.querySelector('#TASK').value = '';
             document.querySelector('#submit').disabled = true;
             return false;
@@ -60,19 +81,19 @@
             }
             
         });
-        var close = document.getElementsByClassName("close")
-        close.addEventListener('click',function(e){
-            if(e.target.className === 'close'){
-                e.target.className.style.display = "none";
-
-            }
-
-        })
+        
+       
 // removing the task if we need to delete it
 
 
+var close = document.getElementsByClassName("close");
+function deleteitem(e){
+    var id = this.parentElement;
+    id.style.display = "none"
+}
 
-    })
+
+    
 
     
 </script>
