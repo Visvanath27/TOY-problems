@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div id="Title" class="header">
+    <h2>MY To-Do-List</h2>
+    <form id="new-task">
+        <input id="TASK" autocomplete="off" autofocus placeholder="add the task.." type="text">
+        <input id="submit" type="submit">
+        <p id=" blank"></p>
+    </form>
+    <ul id="tasks">
+        <li>bills</li>
+        <li>sleep</li>
+        <li>eat</li>
+        <li>code</li>
+        <li>repeat</li>
+
+    </ul>
+</div>
+
+
+
+<script>
+
+    // for disabling the submit and adding the item in the list
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelector('#submit').disabled = true;
+        document.querySelector('#TASK').onkeyup = () => {
+            if(document.querySelector('#TASK').value.length === 0 ){
+                document.querySelector('#submit').disabled = true;
+            }
+            else{
+                document.querySelector('#submit').disabled = false;
+            }
+        };
+        document.querySelector('#new-task').onsubmit = () => {
+            var todo = document.createElement('li');
+            todo.innerHTML = document.querySelector('#TASK').value;
+            document.querySelector('#tasks').append(todo);
+            document.querySelector('#TASK').value = '';
+            document.querySelector('#submit').disabled = true;
+            return false;
+    };
+    // marking as completed
+        var list = document.querySelector('#tasks');
+        list.addEventListener('click',function(check){
+            if(check.target.tagName === 'li'){
+                check.target.classlist.toggle('checked');
+            }
+        },false);
+// removing the task if we need to delete it
+        var nodelist = document.getElementById("LI");
+        var i;
+        for(i = 0; i < nodelist.length;i++){
+            var ele = document.createElement("ele");
+            var node = document.createTextNode("-");
+            ele.className = "close";
+            ele.appendChild(node);
+            nodelist[i].appendChild(ele);
+        }
+        var close = document.getElementsByClassName("close");
+        var i ;
+        for(i = 0;i<close.length;i++){
+            close[i].onclick = function(){
+                var div = this.parentElement;
+                div.display = "none";
+            }
+        }
+
+    })
+
+    
+</script>
+<style>
+    ul li.checked{
+        text-decoration: line-through;
+        text-decoration-color: chartreuse;
+    }
+    
+</style>
+</body>
+</html>
